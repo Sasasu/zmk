@@ -1,0 +1,8 @@
+file_format: "1"
+id: placeholder
+name: placeholder
+type: shield
+url: https://w.sasa.su/
+requires: []
+features:
+  - keys

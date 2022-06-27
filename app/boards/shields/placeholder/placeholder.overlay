@@ -1,0 +1,70 @@
+#include <dt-bindings/zmk/matrix_transform.h>
+#include <dt-bindings/pinctrl/rpi-pico-rp2040-pinctrl.h>
+
+/ {
+	chosen {
+		zmk,kscan = &kscan;
+		zmk,matrix_transform = &transform;
+	};
+
+	transform: transform {
+		compatible = "zmk,matrix-transform";
+		rows = <5>;
+		columns = <5>;
+		map = <
+			RC(4,0) RC(4,1) RC(4,2) RC(4,3) RC(4,4)
+			RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4)
+			RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4)
+			RC(1,0) RC(1,1) RC(1,2) RC(1,3) RC(1,4)
+			RC(0,0) RC(0,1) RC(0,2) RC(0,3) RC(0,4)
+		>;
+	};
+
+	kscan: kscan {
+		compatible = "zmk,kscan-gpio-matrix";
+		diode-direction = "row2col";
+		poll-period-ms = <1>;
+		label = "kscan";
+
+		row-gpios
+		=	<&key_matrix0 3  (GPIO_ACTIVE_HIGH)>
+		,	<&key_matrix0 4  (GPIO_ACTIVE_HIGH)>
+		,	<&key_matrix0 5  (GPIO_ACTIVE_HIGH)>
+		,	<&key_matrix0 6  (GPIO_ACTIVE_HIGH)>
+		,	<&key_matrix0 7  (GPIO_ACTIVE_HIGH)>;
+		col-gpios
+		=	<&key_matrix0 8  (GPIO_ACTIVE_HIGH)>
+		,	<&key_matrix0 9  (GPIO_ACTIVE_HIGH)>
+		,	<&key_matrix0 10 (GPIO_ACTIVE_HIGH)>
+		,	<&key_matrix0 11 (GPIO_ACTIVE_HIGH)>
+		,	<&key_matrix0 12 (GPIO_ACTIVE_HIGH)>;
+	};
+};
+
+&i2c0 {
+	status = "ok";
+	clock-frequency = <400000>;
+
+	key_matrix0: pca95xx@0x20 {
+		compatible = "nxp,pca95xx";
+
+		reg = <0x20>;
+		label = "tca6416";
+
+		gpio-controller;
+		#gpio-cells = <2>;
+		ngpios = <16>;
+	};
+};
+
+&pinctrl {
+	i2c0_default: i2c0_default {
+		group1 {
+			pinmux = <I2C0_SDA_P16>, <I2C0_SCL_P17>;
+			slew-rate = <0>;
+			bias-pull-up;
+			input-enable;
+			input-schmitt-enable;
+		};
+	};
+};

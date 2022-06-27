@@ -1,0 +1,24 @@
+/*
+* Copyright (c) 2020 The ZMK Contributors
+*
+* SPDX-License-Identifier: MIT
+*/
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+/ {
+	keymap {
+		compatible = "zmk,keymap";
+
+		default_layer {
+			bindings = <
+				&kp A     &kp F     &kp C     &kp Q     &kp Z
+				&kp N7    &kp N8    &kp N9    &kp X     &kp R
+				&kp N4    &kp N5    &kp N6    &kp D     &kp T
+				&kp N1    &kp N2    &kp N3    &kp E     &kp G
+				&kp N0    &kp COMMA &kp DOT   &kp S     &kp W
+			>;
+		};
+	};
+};
