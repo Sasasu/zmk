@@ -42,7 +42,7 @@ static uint8_t lithium_ion_mv_to_pct(int16_t bat_mv) {
     if (bat_mv >= 4200) {
         return 100;
     } else if (bat_mv <= 3450) {
-        return 0;
+        return 1;
     }
 
     return bat_mv * 2 / 15 - 459;
@@ -86,7 +86,7 @@ static int zmk_battery_update(const struct device *battery) {
     uint16_t mv = voltage.val1 * 1000 + (voltage.val2 / 1000);
     state_of_charge.val1 = lithium_ion_mv_to_pct(mv);
 
-    LOG_DBG("State of change %d from %d mv", state_of_charge.val1, mv);
+    LOG_DBG("Battery level %d from %d mv", state_of_charge.val1, mv);
 #else
 #error "Not a supported reporting fetch mode"
 #endif

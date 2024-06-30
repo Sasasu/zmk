@@ -141,7 +141,7 @@ static int kscan_matrix_interrupt_configure(const struct device *dev, const gpio
         int err = gpio_pin_interrupt_configure_dt(gpio, flags);
         if (err) {
             LOG_ERR("Unable to configure interrupt for pin %u on %s", gpio->pin, gpio->port->name);
-            return err;
+            // return err;
         }
     }
 

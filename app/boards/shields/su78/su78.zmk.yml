@@ -1,0 +1,9 @@
+file_format: "1"
+id: su78
+name: su78
+type: shield
+url: https://github.com/Sasasu
+requires: [arduino_uno]
+features:
+  - keys
+  - encoder

@@ -13,6 +13,7 @@ int battery_channel_get(const struct battery_value *value, enum sensor_channel c
                         struct sensor_value *val_out) {
     switch (chan) {
     case SENSOR_CHAN_GAUGE_VOLTAGE:
+    case SENSOR_CHAN_VOLTAGE:
         val_out->val1 = value->millivolts / 1000;
         val_out->val2 = (value->millivolts % 1000) * 1000U;
         break;

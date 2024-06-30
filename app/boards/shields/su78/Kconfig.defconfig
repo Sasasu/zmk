@@ -1,0 +1,6 @@
+if SHIELD_SU78
+
+config ZMK_KEYBOARD_NAME
+    default "su78"
+
+endif
